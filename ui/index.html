@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Route Predictor Agentic UI</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <p class="chip">Multi-Agent Route Intelligence</p>
+        <h1>Route Predictor</h1>
+        <p class="subtitle">
+          Enter source and destination to get the best travel mode with reasoning, ranked options, tool-call traces, and memory-based context.
+        </p>
+      </header>
+
+      <section class="card form-card">
+        <form id="route-form">
+          <div class="field-grid">
+            <label>
+              <span>Source</span>
+              <input id="source" name="source" type="text" placeholder="e.g., Bangalore" required />
+            </label>
+            <label>
+              <span>Destination</span>
+              <input id="destination" name="destination" type="text" placeholder="e.g., Mysore" required />
+            </label>
+            <label>
+              <span>Number of Passengers</span>
+              <input id="passengers" name="passengers" type="number" min="1" step="1" value="1" required />
+            </label>
+          </div>
+          <button id="predict-btn" type="submit">Predict Best Route</button>
+        </form>
+      </section>
+
+      <section id="status" class="status hidden"></section>
+
+      <section id="result-card" class="card hidden">
+        <div class="result-top">
+          <div>
+            <p class="meta">Source</p>
+            <h3 id="source-display">-</h3>
+          </div>
+          <div>
+            <p class="meta">Destination</p>
+            <h3 id="destination-display">-</h3>
+          </div>
+          <div>
+            <p class="meta">Selected Mode</p>
+            <h2 id="selected-mode">-</h2>
+          </div>
+          <div>
+            <p class="meta">Climate</p>
+            <h3 id="climate-label">-</h3>
+          </div>
+          <div>
+            <p class="meta">Best Route ID</p>
+            <h3 id="best-route-id">-</h3>
+          </div>
+        </div>
+        <div class="reason-box">
+          <p class="meta">Best Route Path</p>
+          <p id="best-route-path"></p>
+        </div>
+        <div class="reason-box">
+          <p class="meta">Why this mode?</p>
+          <p id="selected-reason"></p>
+        </div>
+        <div class="reason-box">
+          <p class="meta">Public Transport Possibility & Comfort</p>
+          <p id="public-transport-assessment"></p>
+        </div>
+      </section>
+
+      <section id="options-card" class="card hidden">
+        <h3>Ranked Options</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Mode</th>
+                <th>ETA (min)</th>
+                <th>Distance (km)</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="options-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="meta-grid" class="meta-grid hidden">
+        <article class="card">
+          <h3>Tool Calls</h3>
+          <ul id="tool-log" class="list"></ul>
+        </article>
+        <article class="card">
+          <h3>Memory Matches</h3>
+          <ul id="memory-log" class="list"></ul>
+        </article>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
